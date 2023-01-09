@@ -1,0 +1,256 @@
+{
+	"info": {
+		"_postman_id": "bd762d70-f944-46bc-bc3e-f928788d4e19",
+		"name": "TrelloAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25071353"
+	},
+	"item": [
+		{
+			"name": "Create a Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Board başarıyla oluşturuldu\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{trelloBaseUrl}}/1/boards/?name=TrelloAPI_test&key={{trelloKey}}&token={{trelloToken}}",
+					"host": [
+						"{{trelloBaseUrl}}"
+					],
+					"path": [
+						"1",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "TrelloAPI_test"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{trelloBaseUrl}}/1/lists?name=TrelloAPI_testList&idBoard=63b3454d7b11ea0287dfc35b&key={{trelloKey}}&token={{trelloToken}}",
+					"host": [
+						"{{trelloBaseUrl}}"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "TrelloAPI_testList"
+						},
+						{
+							"key": "idBoard",
+							"value": "63b3454d7b11ea0287dfc35b"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{trelloBaseUrl}}/1/cards?idList=63b345de4087d400b818c851&key={{trelloKey}}&token={{trelloToken}}&name=TrelloAPI_testCard",
+					"host": [
+						"{{trelloBaseUrl}}"
+					],
+					"path": [
+						"1",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "idList",
+							"value": "63b345de4087d400b818c851"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						},
+						{
+							"key": "name",
+							"value": "TrelloAPI_testCard"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Checklist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{trelloBaseUrl}}/1/checklists?idCard=63b3466fb3460d015e0acc5f&key={{trelloKey}}&token={{trelloToken}}&name=TrelloAPI_testChecklist",
+					"host": [
+						"{{trelloBaseUrl}}"
+					],
+					"path": [
+						"1",
+						"checklists"
+					],
+					"query": [
+						{
+							"key": "idCard",
+							"value": "63b3466fb3460d015e0acc5f"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						},
+						{
+							"key": "name",
+							"value": "TrelloAPI_testChecklist"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Label",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{trelloBaseUrl}}/1/labels?name=TrelloAPI_testLabel&color=red&idBoard=63b3454d7b11ea0287dfc35b&key={{trelloKey}}&token={{trelloToken}}",
+					"host": [
+						"{{trelloBaseUrl}}"
+					],
+					"path": [
+						"1",
+						"labels"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "TrelloAPI_testLabel"
+						},
+						{
+							"key": "color",
+							"value": "red"
+						},
+						{
+							"key": "idBoard",
+							"value": "63b3454d7b11ea0287dfc35b"
+						},
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
