@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bd762d70-f944-46bc-bc3e-f928788d4e19",
+		"_postman_id": "813e2a6c-ebd9-452b-a0b9-c4d4d38def97",
 		"name": "TrelloAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25071353"
@@ -15,7 +15,25 @@
 						"exec": [
 							"pm.test(\"Board başarıyla oluşturuldu\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"\r",
+							"let response = pm.response.json();\r",
+							"\r",
+							"\r",
+							"let a = \"udemy\";\r",
+							"let b = \"udemy\";\r",
+							"\r",
+							"pm.test(\"a esittir b\", function(){\r",
+							"    pm.expect(a).is.eql(b);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Trello deger kontrolu\", function(){\r",
+							"    pm.expect(response.name).is.eql(\"TrelloAPI_test1\")\r",
+							"    pm.expect(response.closed).to.be.false\r",
+							"})\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"boardId\",response.id);"
 						],
 						"type": "text/javascript"
 					}
@@ -25,7 +43,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{trelloBaseUrl}}/1/boards/?name=TrelloAPI_test&key={{trelloKey}}&token={{trelloToken}}",
+					"raw": "{{trelloBaseUrl}}/1/boards/?name=TrelloAPI_test1&key={{trelloKey}}&token={{trelloToken}}",
 					"host": [
 						"{{trelloBaseUrl}}"
 					],
@@ -37,7 +55,7 @@
 					"query": [
 						{
 							"key": "name",
-							"value": "TrelloAPI_test"
+							"value": "TrelloAPI_test1"
 						},
 						{
 							"key": "key",
@@ -61,7 +79,11 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"\r",
+							"let response  = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"listID\", response.id);"
 						],
 						"type": "text/javascript"
 					}
@@ -71,7 +93,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{trelloBaseUrl}}/1/lists?name=TrelloAPI_testList&idBoard=63b3454d7b11ea0287dfc35b&key={{trelloKey}}&token={{trelloToken}}",
+					"raw": "{{trelloBaseUrl}}/1/lists?name=TrelloAPI_testList&idBoard={{boardId}}&key={{trelloKey}}&token={{trelloToken}}",
 					"host": [
 						"{{trelloBaseUrl}}"
 					],
@@ -86,7 +108,7 @@
 						},
 						{
 							"key": "idBoard",
-							"value": "63b3454d7b11ea0287dfc35b"
+							"value": "{{boardId}}"
 						},
 						{
 							"key": "key",
@@ -110,7 +132,11 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"\r",
+							"let response = pm.response.json();\r",
+							"\r",
+							"pm.environment.set(\"cardID\",response.id);"
 						],
 						"type": "text/javascript"
 					}
@@ -120,7 +146,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{trelloBaseUrl}}/1/cards?idList=63b345de4087d400b818c851&key={{trelloKey}}&token={{trelloToken}}&name=TrelloAPI_testCard",
+					"raw": "{{trelloBaseUrl}}/1/cards?idList={{listID}}&key={{trelloKey}}&token={{trelloToken}}&name=TrelloAPI_testCard",
 					"host": [
 						"{{trelloBaseUrl}}"
 					],
@@ -131,7 +157,7 @@
 					"query": [
 						{
 							"key": "idList",
-							"value": "63b345de4087d400b818c851"
+							"value": "{{listID}}"
 						},
 						{
 							"key": "key",
@@ -169,7 +195,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{trelloBaseUrl}}/1/checklists?idCard=63b3466fb3460d015e0acc5f&key={{trelloKey}}&token={{trelloToken}}&name=TrelloAPI_testChecklist",
+					"raw": "{{trelloBaseUrl}}/1/checklists?idCard={{cardID}}&key={{trelloKey}}&token={{trelloToken}}&name=TrelloAPI_testChecklist",
 					"host": [
 						"{{trelloBaseUrl}}"
 					],
@@ -180,7 +206,7 @@
 					"query": [
 						{
 							"key": "idCard",
-							"value": "63b3466fb3460d015e0acc5f"
+							"value": "{{cardID}}"
 						},
 						{
 							"key": "key",
@@ -218,7 +244,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{trelloBaseUrl}}/1/labels?name=TrelloAPI_testLabel&color=red&idBoard=63b3454d7b11ea0287dfc35b&key={{trelloKey}}&token={{trelloToken}}",
+					"raw": "{{trelloBaseUrl}}/1/labels?name=TrelloAPI_testLabel&color=red&idBoard=63c05202ba8e8803ce87c879&key={{trelloKey}}&token={{trelloToken}}",
 					"host": [
 						"{{trelloBaseUrl}}"
 					],
@@ -237,7 +263,7 @@
 						},
 						{
 							"key": "idBoard",
-							"value": "63b3454d7b11ea0287dfc35b"
+							"value": "63c05202ba8e8803ce87c879"
 						},
 						{
 							"key": "key",
@@ -246,6 +272,106 @@
 						{
 							"key": "token",
 							"value": "{{trelloToken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Card Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/1/cards/:id?key={{trelloKey}}&token={{trelloToken}}&name=1-yeni guncelleme",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						":id"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						},
+						{
+							"key": "name",
+							"value": "1-yeni guncelleme"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{cardID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/1/cards/::id?key={{trelloKey}}&token={{trelloToken}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"1",
+						"cards",
+						"::id"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{trelloKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{trelloToken}}"
+						}
+					],
+					"variable": [
+						{
+							"key": ":id",
+							"value": "{{cardID}}"
 						}
 					]
 				}
